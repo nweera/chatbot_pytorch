@@ -89,7 +89,8 @@
         "What is the shipping time?",
         "When will my order arrive?",
         "How quick is the delivery?",
-        "Delivery duration?"
+        "Delivery duration?",
+        "How long does shipping take?"
       ],
       "responses": [
         "Delivery typically takes 2-4 business days.",

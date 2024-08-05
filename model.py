@@ -11,9 +11,13 @@ class NeuralNet(nn.Module):
         self.relu = nn.ReLU()
     
     def forward(self, x):
+        # Pass the input through the first layer and apply ReLU 
         out = self.l1(x)
         out = self.relu(out)
+        # Pass the result through the second layer and apply ReLU
         out = self.l2(out)
         out = self.relu(out)
+        # Pass the result through the third layer
         out = self.l3(out)
         return out
+#relu allows the network to learn complex patterns in the data.
