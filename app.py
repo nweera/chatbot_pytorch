@@ -11,10 +11,10 @@ def index_get():
 # Define a route for the prediction endpoint using a POST request
 @app.post('/predict')
 def predict():
-    text = request.get_json().get("message")
-    response = get_response(text)
-    message = {"answer": response}
-    return jsonify(message)
+    text = request.get_json().get("message")# Get the message from the request
+    response = get_response(text)# Get the response from the chatbot
+    message = {"answer": response}# Create a dictionary with the response
+    return jsonify(message)# Return the response as JSON
 
 
 if __name__ == '__main__':
