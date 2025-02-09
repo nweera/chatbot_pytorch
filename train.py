@@ -1,5 +1,4 @@
 import numpy as np
-import random
 import json
 
 import torch
@@ -77,28 +76,31 @@ class ChatDataset(Dataset):
 dataset = ChatDataset()
 train_loader = DataLoader(dataset=dataset,
                           batch_size=batch_size,# Number of samples per batch
-                          shuffle=True,# Shuffle the data at each epoch
-                          num_workers=0) # Number of worker threads to use
+                          shuffle=True)# Shuffle the data at each epoch
+
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+# Output: cuda (if GPU available) or cpu (if no GPU)
+#Deep learning models run much faster on a GPU compared to a CPU.
 
 model = NeuralNet(input_size, hidden_size, output_size).to(device)
 
-criterion = nn.CrossEntropyLoss()
+criterion = nn.CrossEntropyLoss() #multi-class classification problem
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+# optimizer updates the model’s parameters (weights) to minimize the loss function
 
 # Training loop
 for epoch in range(num_epochs):
-    for (words, labels) in train_loader:
+    for (words, labels) in train_loader:# Loop through each batch
         words = words.to(device)
         labels = labels.to(dtype=torch.long).to(device)
         
-        outputs = model(words) # Get model predictions
+        outputs = model(words) # Get model predictions (forword pass)
         loss = criterion(outputs, labels) # Calculate loss
         
-        optimizer.zero_grad()
-        loss.backward()
-        optimizer.step()
+        optimizer.zero_grad() # Clear gradients before backward pass
+        loss.backward()# Perform backward pass
+        optimizer.step()# Update the weights
         
     # Print the loss every 100 epochs
     if (epoch+1) % 100 == 0:
