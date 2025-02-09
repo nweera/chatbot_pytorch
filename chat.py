@@ -26,10 +26,10 @@ model_state = data["model_state"]
 
 # Initialize the neural network model and load its state
 model = NeuralNet(input_size, hidden_size, output_size).to(device)
-model.load_state_dict(model_state)
-model.eval()
+model.load_state_dict(model_state)# Load the model state
+model.eval()# Set the model to evaluation mode
 
-bot_name = "Sam"
+bot_name = "BOT"
 
 def get_response(msg):
     # Tokenize the input message
